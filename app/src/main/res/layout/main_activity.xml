@@ -103,7 +103,8 @@
                 android:padding="8dp"
                 android:text="@string/lap"
                 android:textAllCaps="true"
-                android:textColor="@color/primaryText" />
+                android:textColor="@color/primaryText"
+                android:visibility="invisible"/>
         </FrameLayout>
 
     </LinearLayout>

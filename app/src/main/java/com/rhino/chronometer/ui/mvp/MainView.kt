@@ -14,6 +14,7 @@ import com.rhino.chronometer.R
 import com.rhino.chronometer.ui.LapAdapter
 import com.rhino.chronometer.ui.MainActivity
 import io.reactivex.Observable
+import kotlinx.android.synthetic.main.item.view.*
 import kotlinx.android.synthetic.main.main_activity.view.*
 
 
@@ -51,9 +52,15 @@ class MainView(val activity: MainActivity, val adapter: LapAdapter)
         set(value) {
             btnAction.setImageDrawable(ContextCompat.getDrawable(context, value!!))
         }
+    override var visibilityLapButton: Int? = View.INVISIBLE
+        set(value) {
+            tvRight.visibility = value!!
+        }
 
     override fun addLap(text: String) {
         adapter.addItem(text)
+        recyclerView.smoothScrollToPosition(adapter.itemCount)
+
     }
 
     override fun setContentDrawable(color: Int) {

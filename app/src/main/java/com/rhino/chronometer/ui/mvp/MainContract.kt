@@ -26,6 +26,7 @@ class MainContract {
         val switch: Observable<Any>
         val reset: Observable<Any>
         var timer: String?
+        var visibilityLapButton: Int?
         fun setTimer(id: Int)
         fun addLap(text: String)
         fun setContentDrawable(color: Int)

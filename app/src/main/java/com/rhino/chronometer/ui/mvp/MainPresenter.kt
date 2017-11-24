@@ -1,6 +1,8 @@
 package com.rhino.chronometer.ui.mvp
 
 import android.util.Log
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import com.rhino.chronometer.R
 import com.rhino.chronometer.Util
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -37,7 +39,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
     }
 
     override fun onDestroy() {
-        pause()
+        dispose()
         compositeDisposable.clear()
     }
 
@@ -72,6 +74,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
     }
 
     private fun startTimer() {
+        view.visibilityLapButton = VISIBLE
         view.setContentDrawable(R.color.accent)
         view.clearAnimationTimer()
         pause = false
@@ -96,7 +99,11 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
 
     private fun pause() {
         pause = true
+        view.visibilityLapButton = INVISIBLE
+        dispose()
+    }
 
+    private fun dispose(){
         if (timer != null) {
             timer!!.dispose()
             timer = null
