@@ -1,5 +1,6 @@
 package com.rhino.chronometer.ui
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.rhino.chronometer.app.ChronometerApplication
@@ -17,14 +18,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initComponent()
-        setContentView(view.inflateLayout())
+
+                setContentView(view.inflateLayout())
         presenter.onCreate()
 
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         presenter.onDestroy()
+        super.onDestroy()
     }
 
     private fun initComponent() {

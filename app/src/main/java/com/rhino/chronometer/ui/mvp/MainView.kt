@@ -1,19 +1,21 @@
 package com.rhino.chronometer.ui.mvp
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.GradientDrawable
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import com.jakewharton.rxbinding2.view.RxView
 import com.rhino.chronometer.R
-import com.rhino.chronometer.ui.MainActivity
 import com.rhino.chronometer.ui.LapAdapter
+import com.rhino.chronometer.ui.MainActivity
 import io.reactivex.Observable
-
 import kotlinx.android.synthetic.main.main_activity.view.*
+
 
 /**
  * Created by alexanderjosefermingomez on 11/20/17.
@@ -54,8 +56,10 @@ class MainView(val activity: MainActivity, val adapter: LapAdapter)
         adapter.addItem(text)
     }
 
-    override fun setContentDrawable(drawable: ShapeDrawable) {
-
+    override fun setContentDrawable(color: Int) {
+        val shapeDrawable = ivContentTimer.background as GradientDrawable
+        shapeDrawable.setStroke(resources.getDimensionPixelSize(R.dimen.stroke_content_timer),
+                ContextCompat.getColor(context, color))
     }
 
     override fun setTimer(id: Int) {
@@ -64,6 +68,15 @@ class MainView(val activity: MainActivity, val adapter: LapAdapter)
 
     override fun removeLaps() {
         adapter.removeAll()
+    }
+
+    override fun startAnimationTimer() {
+        val startAnimation = AnimationUtils.loadAnimation(context, R.anim.blinking_animation)
+        tvTimer.animation = startAnimation
+    }
+
+    override fun clearAnimationTimer() {
+        tvTimer.clearAnimation()
     }
 
 }
