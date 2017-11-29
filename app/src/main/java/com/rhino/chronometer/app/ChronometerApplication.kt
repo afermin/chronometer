@@ -15,26 +15,20 @@ class ChronometerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
+        appComponent = DaggerAppComponent.builder().build()
 
         appComponent.inject(this)
     }
 
-    fun component(): AppComponent? {
-        return appComponent
-    }
+    fun component(): AppComponent? = appComponent
 
     companion object {
 
-        operator fun get(activity: Activity): ChronometerApplication {
-            return activity.application as ChronometerApplication
-        }
+        operator fun get(activity: Activity): ChronometerApplication =
+                activity.application as ChronometerApplication
 
-        operator fun get(service: Service): ChronometerApplication {
-            return service.application as ChronometerApplication
-        }
+        operator fun get(service: Service): ChronometerApplication =
+                service.application as ChronometerApplication
     }
 
 }

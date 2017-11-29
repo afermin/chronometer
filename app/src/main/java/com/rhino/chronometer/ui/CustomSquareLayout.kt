@@ -2,12 +2,7 @@ package com.rhino.chronometer.ui
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.RelativeLayout
-import android.view.View.MeasureSpec
 import android.widget.FrameLayout
-import android.widget.LinearLayout
-
-
 
 
 /**

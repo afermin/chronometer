@@ -1,9 +1,8 @@
-package com.rhino.chronometer.ui.mvp
+package com.rhino.chronometer.activities.mvp
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.GradientDrawable
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,9 @@ import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import com.jakewharton.rxbinding2.view.RxView
 import com.rhino.chronometer.R
-import com.rhino.chronometer.ui.LapAdapter
-import com.rhino.chronometer.ui.MainActivity
+import com.rhino.chronometer.activities.main.LapAdapter
+import com.rhino.chronometer.activities.main.MainActivity
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.item.view.*
 import kotlinx.android.synthetic.main.main_activity.view.*
 
 

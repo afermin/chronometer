@@ -1,12 +1,11 @@
-package com.rhino.chronometer.ui
+package com.rhino.chronometer.activities.main
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.rhino.chronometer.app.ChronometerApplication
-import com.rhino.chronometer.ui.di.DaggerMainComponent
-import com.rhino.chronometer.ui.di.MainModule
-import com.rhino.chronometer.ui.mvp.MainContract
+import com.rhino.chronometer.activities.main.di.DaggerMainComponent
+import com.rhino.chronometer.activities.main.di.MainModule
+import com.rhino.chronometer.activities.mvp.MainContract
 import javax.inject.Inject
 
 
@@ -18,10 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initComponent()
-
-                setContentView(view.inflateLayout())
+        setContentView(view.inflateLayout())
         presenter.onCreate()
-
     }
 
     override fun onDestroy() {
@@ -30,10 +27,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initComponent() {
-         DaggerMainComponent.builder()
-                 .appComponent(ChronometerApplication[this].component())
-                 .mainModule(MainModule(this))
-                 .build()
-                 .inject(this)
+        DaggerMainComponent.builder()
+                .appComponent(ChronometerApplication[this].component())
+                .mainModule(MainModule(this))
+                .build()
+                .inject(this)
     }
 }

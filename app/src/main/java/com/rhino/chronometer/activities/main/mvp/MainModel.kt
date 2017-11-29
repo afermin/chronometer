@@ -1,7 +1,7 @@
-package com.rhino.chronometer.ui.mvp
+package com.rhino.chronometer.activities.mvp
 
 import android.util.Log
-import com.rhino.chronometer.ui.MainActivity
+import com.rhino.chronometer.activities.main.MainActivity
 import com.twistedequations.rx2state.RxSaveState
 import io.reactivex.Maybe
 import io.reactivex.Observable

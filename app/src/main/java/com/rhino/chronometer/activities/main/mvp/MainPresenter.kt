@@ -1,4 +1,4 @@
-package com.rhino.chronometer.ui.mvp
+package com.rhino.chronometer.activities.mvp
 
 import android.util.Log
 import android.view.View.INVISIBLE

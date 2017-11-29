@@ -1,9 +1,6 @@
-package com.rhino.chronometer.ui.mvp
+package com.rhino.chronometer.activities.mvp
 
-import android.arch.lifecycle.ViewModel
-import android.graphics.drawable.ShapeDrawable
 import android.view.ViewGroup
-import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
 

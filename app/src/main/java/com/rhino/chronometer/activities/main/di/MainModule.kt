@@ -1,13 +1,12 @@
-package com.rhino.chronometer.ui.di
+package com.rhino.chronometer.activities.main.di
 
 import android.content.Context
-import com.rhino.chronometer.app.di.AppScope
-import com.rhino.chronometer.ui.MainActivity
-import com.rhino.chronometer.ui.LapAdapter
-import com.rhino.chronometer.ui.mvp.MainContract
-import com.rhino.chronometer.ui.mvp.MainModel
-import com.rhino.chronometer.ui.mvp.MainPresenter
-import com.rhino.chronometer.ui.mvp.MainView
+import com.rhino.chronometer.activities.main.MainActivity
+import com.rhino.chronometer.activities.main.LapAdapter
+import com.rhino.chronometer.activities.mvp.MainContract
+import com.rhino.chronometer.activities.mvp.MainModel
+import com.rhino.chronometer.activities.mvp.MainPresenter
+import com.rhino.chronometer.activities.mvp.MainView
 import dagger.Module
 import dagger.Provides
 

@@ -1,4 +1,4 @@
-package com.rhino.chronometer.ui.di
+package com.rhino.chronometer.activities.main.di
 
 /**
  * Created by alexanderjosefermingomez on 11/21/17.

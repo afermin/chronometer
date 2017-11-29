@@ -1,7 +1,7 @@
-package com.rhino.chronometer.ui.di
+package com.rhino.chronometer.activities.main.di
 
 import com.rhino.chronometer.app.di.AppComponent
-import com.rhino.chronometer.ui.MainActivity
+import com.rhino.chronometer.activities.main.MainActivity
 import dagger.Component
 
 /**
