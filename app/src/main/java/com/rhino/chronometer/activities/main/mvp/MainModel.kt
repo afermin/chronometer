@@ -6,6 +6,7 @@ import com.twistedequations.rx2state.RxSaveState
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit
 
 class MainModel(val activity: MainActivity) : MainContract.Model {
 
+    private val LAPS_STATE_KEY = "LAPS_STATE_KEY"
     private val TIME_STATE_KEY = "TIME_STATE_KEY"
     private val PAUSE_STATE_KEY = "PAUSE_STATE_KEY"
 
@@ -45,6 +47,24 @@ class MainModel(val activity: MainActivity) : MainContract.Model {
     override fun getPauseFromSaveState(): Maybe<Boolean>? {
         return RxSaveState.getSavedState(activity)
                 .map<Boolean> { bundle -> bundle.getBoolean(PAUSE_STATE_KEY) }
+    }
+
+    override fun addLap(lastTimeString: String) {
+        RxSaveState.updateSaveState(activity) { bundle ->
+            var array = bundle.getStringArrayList(LAPS_STATE_KEY)
+            if (array == null) array = ArrayList<String>()
+            array.add(lastTimeString)
+            bundle.putStringArrayList(LAPS_STATE_KEY, array)
+        }
+    }
+
+    override fun getLapsFromSaveState(): Maybe<ArrayList<String>>? {
+        return RxSaveState.getSavedState(activity)
+                .map<ArrayList<String>> { bundle -> bundle.getStringArrayList(LAPS_STATE_KEY) }
+    }
+
+    override fun clearSaveState() {
+        RxSaveState.getSavedStateDirect(activity)?.clear()
     }
 
 

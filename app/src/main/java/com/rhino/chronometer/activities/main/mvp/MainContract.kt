@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
+import java.util.*
 
 /**
  * Created by alexanderjosefermingomez on 11/20/17.
@@ -17,6 +18,9 @@ class MainContract {
         fun getTimeFromSaveState(): Maybe<Long>?
         fun savePauseState(pause: Boolean)
         fun getPauseFromSaveState(): Maybe<Boolean>?
+        fun addLap(lastTimeString: String)
+        fun getLapsFromSaveState(): Maybe<ArrayList<String>>?
+        fun clearSaveState()
     }
 
     interface View {
@@ -33,6 +37,7 @@ class MainContract {
         fun removeLaps()
         fun startAnimationTimer()
         fun clearAnimationTimer()
+        fun setLaps(array: ArrayList<String>)
     }
 
     interface Presenter {

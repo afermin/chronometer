@@ -36,8 +36,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
             add(view.switch.subscribe { switch() })
         }
         view.setContentDrawable(R.color.gray_600)
-
-        compositeDisposable.add(loadSavedState())
+        loadSavedState()
     }
 
     override fun onDestroy() {
@@ -45,15 +44,13 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
         compositeDisposable.clear()
     }
 
-    private fun loadSavedState(): Disposable {
-        return model.getTimeFromSaveState()!!
+    private fun loadSavedState() {
+        compositeDisposable.add(model.getTimeFromSaveState()!!
                 .subscribe { time ->
                     lastTime = time
                     view.setTimer(Util.chronometerFormat(lastTime))
-                    Log.d("loadSavedState", lastTime.toString())
                     model.getPauseFromSaveState()!!.subscribe({ paused ->
                         pause = paused
-                        Log.d("loadSavedState", pause.toString())
                         if (!paused) startTimer()
                         else if (lastTime != 0L ) {
                             view.startAnimationTimer()
@@ -61,6 +58,11 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
                         }
                     })
                 }
+        )
+        compositeDisposable.add(model.getLapsFromSaveState()!!
+                .subscribe{ array ->
+                    view.setLaps(array)
+                })
     }
 
     private fun switch() {
@@ -112,7 +114,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
 
     private fun reset() {
         pause()
-        model.saveTimeState(0)
+        model.clearSaveState()
         view.setContentDrawable(R.color.gray_600)
         view.clearAnimationTimer()
         lastTime = 0
@@ -123,6 +125,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
 
     private fun addLap() {
         view.addLap(lastTimeString)
+        model.addLap(lastTimeString)
     }
 
 }

@@ -14,6 +14,7 @@ import com.rhino.chronometer.activities.main.LapAdapter
 import com.rhino.chronometer.activities.main.MainActivity
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.main_activity.view.*
+import java.util.*
 
 
 /**
@@ -57,7 +58,10 @@ class MainView(val activity: MainActivity, val adapter: LapAdapter)
     override fun addLap(text: String) {
         adapter.addItem(text)
         recyclerView.smoothScrollToPosition(adapter.itemCount)
+    }
 
+    override fun setLaps(array: ArrayList<String>) {
+        adapter.setItems(array)
     }
 
     override fun setContentDrawable(color: Int) {

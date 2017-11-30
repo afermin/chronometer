@@ -9,6 +9,7 @@ import com.rhino.chronometer.R
 import com.rhino.chronometer.activities.main.di.MainScope
 import javax.inject.Inject
 import android.widget.TextView
+import java.util.*
 
 /**
  * Created by alexanderjosefermingomez on 11/20/17.
@@ -39,6 +40,12 @@ class LapAdapter @Inject constructor(@MainScope val context: Context): RecyclerV
 
     fun addItem(text: String) {
         dataSet.add(text)
+        notifyItemInserted(dataSet.size-1)
+    }
+
+    fun setItems(array: ArrayList<String>) {
+        dataSet.clear()
+        dataSet.addAll(array)
         notifyItemInserted(dataSet.size-1)
     }
 
