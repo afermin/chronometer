@@ -1,8 +1,9 @@
-package com.rhino.chronometer.activities.mvp
+package com.rhino.chronometer.activities.main.mvp
 
 import android.util.Log
 import com.rhino.chronometer.activities.main.MainActivity
 import com.twistedequations.rx2state.RxSaveState
+import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
@@ -16,13 +17,20 @@ class MainModel(val activity: MainActivity) : MainContract.Model {
     private val TIME_STATE_KEY = "TIME_STATE_KEY"
     private val PAUSE_STATE_KEY = "PAUSE_STATE_KEY"
 
-    override fun timerObservable(initTime: Long): Observable<Long> {
+    companion object {
+        val INTERVAL = 103L
+    }
+
+    override fun timerObservable(initTime: Long): Flowable<Long> {
         Log.d("timerObservable", "timerObservable")
-        return Observable.intervalRange(initTime, 3600000 - initTime, 0L, 1L, TimeUnit.MILLISECONDS)
+        return Flowable.intervalRange(initTime, 3600000 - initTime, 0L, INTERVAL,
+                TimeUnit.MILLISECONDS)
     }
 
     override fun saveTimeState(time: Long) {
-        RxSaveState.updateSaveState(activity) { bundle -> bundle.putLong(TIME_STATE_KEY, time) }
+        this.activity.runOnUiThread {
+            RxSaveState.updateSaveState(activity) { bundle -> bundle.putLong(TIME_STATE_KEY, time) }
+        }
     }
 
     override fun getTimeFromSaveState(): Maybe<Long>? {
@@ -38,5 +46,6 @@ class MainModel(val activity: MainActivity) : MainContract.Model {
         return RxSaveState.getSavedState(activity)
                 .map<Boolean> { bundle -> bundle.getBoolean(PAUSE_STATE_KEY) }
     }
+
 
 }

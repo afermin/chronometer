@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.rhino.chronometer.app.ChronometerApplication
 import com.rhino.chronometer.activities.main.di.DaggerMainComponent
 import com.rhino.chronometer.activities.main.di.MainModule
-import com.rhino.chronometer.activities.mvp.MainContract
+import com.rhino.chronometer.activities.main.mvp.MainContract
 import javax.inject.Inject
 
 

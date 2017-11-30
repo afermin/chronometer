@@ -1,6 +1,7 @@
-package com.rhino.chronometer.activities.mvp
+package com.rhino.chronometer.activities.main.mvp
 
 import android.view.ViewGroup
+import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
 
@@ -11,7 +12,7 @@ import io.reactivex.Observable
 
 class MainContract {
     interface Model {
-        fun timerObservable(lastTime: Long): Observable<Long>
+        fun timerObservable(lastTime: Long): Flowable<Long>
         fun saveTimeState(time: Long)
         fun getTimeFromSaveState(): Maybe<Long>?
         fun savePauseState(pause: Boolean)
@@ -22,7 +23,7 @@ class MainContract {
         val addSpin: Observable<Any>
         val switch: Observable<Any>
         val reset: Observable<Any>
-        var timer: String?
+        fun setTimer(string: String)
         var visibilityLapButton: Int?
         fun setTimer(id: Int)
         fun addLap(text: String)

@@ -1,4 +1,4 @@
-package com.rhino.chronometer.activities.mvp
+package com.rhino.chronometer.activities.main.mvp
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.GradientDrawable
@@ -39,13 +39,12 @@ class MainView(val activity: MainActivity, val adapter: LapAdapter)
     override val addSpin: Observable<Any> by lazy { RxView.clicks(tvRight) }
     override val switch: Observable<Any> by lazy { RxView.clicks(btnAction) }
     override val reset: Observable<Any> by lazy { RxView.clicks(tvLeft) }
-    override var timer: String?
-        get() = tvTimer?.text?.toString()
-        set(value) {
-            this.activity.runOnUiThread {
-                tvTimer?.text = value
-            }
+    override fun setTimer(string: String) {
+        this.activity.runOnUiThread {
+            tvTimer.text = string
         }
+    }
+
     override var switchIcon: Int? = R.drawable.ic_play_arrow_48px
         set(value) {
             btnAction.setImageDrawable(ContextCompat.getDrawable(context, value!!))

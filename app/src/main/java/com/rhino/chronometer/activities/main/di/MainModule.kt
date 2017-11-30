@@ -3,10 +3,10 @@ package com.rhino.chronometer.activities.main.di
 import android.content.Context
 import com.rhino.chronometer.activities.main.MainActivity
 import com.rhino.chronometer.activities.main.LapAdapter
-import com.rhino.chronometer.activities.mvp.MainContract
-import com.rhino.chronometer.activities.mvp.MainModel
-import com.rhino.chronometer.activities.mvp.MainPresenter
-import com.rhino.chronometer.activities.mvp.MainView
+import com.rhino.chronometer.activities.main.mvp.MainContract
+import com.rhino.chronometer.activities.main.mvp.MainModel
+import com.rhino.chronometer.activities.main.mvp.MainPresenter
+import com.rhino.chronometer.activities.main.mvp.MainView
 import dagger.Module
 import dagger.Provides
 

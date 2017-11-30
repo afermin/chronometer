@@ -1,13 +1,15 @@
-package com.rhino.chronometer.activities.mvp
+package com.rhino.chronometer.activities.main.mvp
 
 import android.util.Log
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import com.rhino.chronometer.R
 import com.rhino.chronometer.Util
+import com.rhino.chronometer.model.Lap
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 
 /**
@@ -33,7 +35,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
             add(view.reset.subscribe { reset() })
             add(view.switch.subscribe { switch() })
         }
-        view.setContentDrawable(R.color.gray_900)
+        view.setContentDrawable(R.color.gray_600)
 
         compositeDisposable.add(loadSavedState())
     }
@@ -47,7 +49,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
         return model.getTimeFromSaveState()!!
                 .subscribe { time ->
                     lastTime = time
-                    view.timer = Util.chronometerFormat(lastTime)
+                    view.setTimer(Util.chronometerFormat(lastTime))
                     Log.d("loadSavedState", lastTime.toString())
                     model.getPauseFromSaveState()!!.subscribe({ paused ->
                         pause = paused
@@ -55,7 +57,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
                         if (!paused) startTimer()
                         else if (lastTime != 0L ) {
                             view.startAnimationTimer()
-                            view.setContentDrawable(R.color.gray_500)
+                            view.setContentDrawable(R.color.gray_300)
                         }
                     })
                 }
@@ -69,7 +71,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
             pause()
             model.savePauseState(pause)
             view.switchIcon = R.drawable.ic_play_arrow_48px
-            view.setContentDrawable(R.color.gray_500)
+            view.setContentDrawable(R.color.gray_300)
         }
     }
 
@@ -85,15 +87,13 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
 
     private fun getTimerObservable(): Disposable? {
         return model.timerObservable(lastTime)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
+                .onBackpressureDrop()
+                .observeOn(Schedulers.io())
                 .subscribe({
-                    lastTime = it
-                    if (lastTime==0L) Log.d("-- loadSavedState", lastTime.toString())
-
+                    lastTime += MainModel.INTERVAL
                     model.saveTimeState(lastTime)
-                    lastTimeString = Util.chronometerFormat(it)
-                    view.timer = lastTimeString
+                    lastTimeString = Util.chronometerFormat(lastTime)
+                    view.setTimer(lastTimeString)
                 })
     }
 
@@ -113,7 +113,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
     private fun reset() {
         pause()
         model.saveTimeState(0)
-        view.setContentDrawable(R.color.gray_900)
+        view.setContentDrawable(R.color.gray_600)
         view.clearAnimationTimer()
         lastTime = 0
         view.setTimer(R.string.init)
