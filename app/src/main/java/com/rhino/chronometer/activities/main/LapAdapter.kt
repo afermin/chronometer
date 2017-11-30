@@ -12,7 +12,7 @@ import android.widget.TextView
 import java.util.*
 
 /**
- * Created by alexanderjosefermingomez on 11/20/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/20/17.
  */
 @MainScope
 class LapAdapter @Inject constructor(@MainScope val context: Context): RecyclerView.Adapter<LapAdapter.ViewHolder>() {

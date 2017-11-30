@@ -10,7 +10,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by alexanderjosefermingomez on 11/20/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/20/17.
  */
 
 class MainModel(val activity: MainActivity) : MainContract.Model {

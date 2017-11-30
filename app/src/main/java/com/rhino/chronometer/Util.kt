@@ -2,7 +2,7 @@ package com.rhino.chronometer
 
 
 /**
- * Created by alexanderjosefermingomez on 11/21/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/21/17.
  */
 class Util {
     companion object {
