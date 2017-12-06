@@ -3,7 +3,6 @@
 Contents
 -----------------
 
-- [Apk](https://drive.google.com/open?id=108X4lcgc0gESkb_mdBVYsOnUoyvidm3H)
 - [Structure](#structure)
 - [Libraries](#libraries)
 
